@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import "../App.css"
 import Eyes from "../assets/img/carbon_view.png"
-import { BASE_URL } from "../assets/API/axios";
+import { BASE_URL } from "../utils/API/axios";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +14,7 @@ const Login = () => {
         type: 'password',
         visible: false
     });
-    const [checking, setchecking] = useState( localStorage.getItem("token") );
+    const [checking, setchecking] = useState(localStorage.getItem("token"));
     const isDisabled = !(id && password);
     const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const Login = () => {
         setchecking(!checking)
     }
 
-    const ChangePasswordType = ( e ) => {
+    const ChangePasswordType = (e) => {
         setPasswordType(() => {
             if (!passwordType.visible) {
                 return { type: 'text', visible: true };
@@ -32,69 +32,69 @@ const Login = () => {
     }
 
     const LoginAPI = () => {
-        axios.post(`${ BASE_URL }/users/login`,
-        {
-            "account_id" : id,
-            "password" : password
-        })
-        .then((Response) => {
-            if(checking === true){
-                localStorage.setItem("id", id);
-                localStorage.setItem("token", Response.data.access_token)
-            }
-            else{
-                localStorage.setItem("token", Response.data.access_token)
-            }
-            alert("성공");
-            navigate("/")
-            
-        })
-        .catch((error) => {
-            alert("실패");
-        })
+        axios.post(`${BASE_URL}/users/login`,
+            {
+                "account_id": id,
+                "password": password
+            })
+            .then((Response) => {
+                if (checking === true) {
+                    localStorage.setItem("id", id);
+                    localStorage.setItem("token", Response.data.access_token)
+                }
+                else {
+                    localStorage.setItem("token", Response.data.access_token)
+                }
+                alert("성공");
+                navigate("/")
+
+            })
+            .catch((error) => {
+                alert("실패");
+            })
     }
 
-    return(
+    return (
         <>
-        <Center>
-            <Wrapper>
-                <SignUpText>로그인</SignUpText>
-                <div>
-                    <Text>아이디</Text>
-                    <TextInput
-                    defaultValue={id}
-                    placeholder="아이디를 입력해주세요."
-                    type="text"
-                    onChange={(e) => {
-                        setId(e.target.value);
-                    }}
-                    />
-                </div>
-                <div>
-                    <Text>비밀번호</Text>
-                    <TextInput
-                    placeholder="비밀번호를 입력해주세요."
-                    type={passwordType.type}
-                    onChange={(e) => {
-                        setPassword(e.target.value);
-                    }}
-                    />
-                    <EyeImg onClick={ChangePasswordType} src={Eyes}></EyeImg>
-                </div>
-                <RememberDiv>
-                    <RememberCheckBox
-                    type="checkbox"
-                    onClick={CheckBox}
-                    defaultChecked={id}
-                    />
-                    <div>아이디 저장</div>
-                </RememberDiv>
-                <Btn
-                disabled={isDisabled}
-                onClick={LoginAPI}
-                >완료</Btn>
-            </Wrapper>
-        </Center>
+            <Center>
+                <Wrapper>
+                    <SignUpText>로그인</SignUpText>
+                    <div>
+                        <Text>아이디</Text>
+                        <TextInput
+                            defaultValue={id}
+                            placeholder="아이디를 입력해주세요."
+                            type="text"
+                            onChange={(e) => {
+                                setId(e.target.value);
+                            }}
+                        />
+                    </div>
+                    <div>
+                        <Text>비밀번호</Text>
+                        <TextInput
+                            placeholder="비밀번호를 입력해주세요."
+                            type={passwordType.type}
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                            }}
+                        />
+                        <EyeImg onClick={ChangePasswordType} src={Eyes}></EyeImg>
+                    </div>
+                    <RememberDiv>
+                        <RememberCheckBox
+                            type="checkbox"
+                            onClick={CheckBox}
+                            defaultChecked={id}
+                        />
+                        <div>아이디 저장</div>
+                    </RememberDiv>
+                    <Btn
+                        disabled={isDisabled}
+                        onClick={LoginAPI}
+                    >완료</Btn>
+                </Wrapper>
+            </Center>
         </>
     )
 }

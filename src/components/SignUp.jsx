@@ -3,7 +3,7 @@ import "../App.css"
 import styled from "styled-components";
 import { useState } from "react";
 import Eyes from "../assets/img/carbon_view.png"
-import { BASE_URL } from "../assets/API/axios";
+import { BASE_URL } from "../utils/API/axios";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -21,31 +21,31 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const SameChecking = () => {
-        if(confirm === password){
+        if (confirm === password) {
             SignUpAPI();
         }
-        else{
+        else {
             alert("에러");
         }
     }
 
     const SignUpAPI = () => {
-        axios.post(`${ BASE_URL }/users/signup`,
-        {
-            "account_id" : id,
-            "password" : password,
-            "name" : name
-        })
-        .then((Response) => {
-            alert("성공");
-            navigate("/")
-        })
-        .catch((error) => {
-            alert("실패");
-        })
+        axios.post(`${BASE_URL}/users/signup`,
+            {
+                "account_id": id,
+                "password": password,
+                "name": name
+            })
+            .then((Response) => {
+                alert("성공");
+                navigate("/")
+            })
+            .catch((error) => {
+                alert("실패");
+            })
     }
 
-    const ChangePasswordType = ( e ) => {
+    const ChangePasswordType = (e) => {
         setPasswordType(() => {
             if (!passwordType.visible) {
                 return { type: 'text', visible: true };
@@ -54,55 +54,55 @@ const SignUp = () => {
         })
     }
 
-    return(
+    return (
         <Center>
             <Wrapper>
                 <SignUpText>회원가입</SignUpText>
                 <div>
                     <Text>이름</Text>
                     <TextInput
-                    placeholder="2 ~ 10글자 이하여야 합니다."
-                    type="text"
-                    onChange={(e) => {
-                        setName(e.target.value);
-                    }}
+                        placeholder="2 ~ 10글자 이하여야 합니다."
+                        type="text"
+                        onChange={(e) => {
+                            setName(e.target.value);
+                        }}
                     />
                 </div>
                 <div>
                     <Text>아이디</Text>
                     <TextInput
-                    placeholder="6 ~ 20글자 이하여야 합니다."
-                    type="text"
-                    onChange={(e) => {
-                        setId(e.target.value);
-                    }}
+                        placeholder="6 ~ 20글자 이하여야 합니다."
+                        type="text"
+                        onChange={(e) => {
+                            setId(e.target.value);
+                        }}
                     />
                 </div>
                 <div>
                     <Text>비밀번호</Text>
                     <TextInput
-                    placeholder="대문자, 소문자, 숫자, 특수문자가 최소 1개씩 포함되어야 합니다."
-                    type={passwordType.type}
-                    onChange={(e) => {
-                        setPassword(e.target.value);
-                    }}
+                        placeholder="대문자, 소문자, 숫자, 특수문자가 최소 1개씩 포함되어야 합니다."
+                        type={passwordType.type}
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                        }}
                     />
                     <EyeImg onClick={ChangePasswordType} src={Eyes}></EyeImg>
                 </div>
                 <div>
                     <Text>비밀번호 확인</Text>
                     <TextInput
-                    placeholder="대문자, 소문자, 숫자, 특수문자가 최소 1개씩 포함되어야 합니다."
-                    type={passwordType.type}
-                    onChange={(e) => {
-                        setConfirm(e.target.value);
-                    }}
+                        placeholder="대문자, 소문자, 숫자, 특수문자가 최소 1개씩 포함되어야 합니다."
+                        type={passwordType.type}
+                        onChange={(e) => {
+                            setConfirm(e.target.value);
+                        }}
                     />
                     <EyeImg onClick={ChangePasswordType} src={Eyes}></EyeImg>
                 </div>
                 <Btn
-                disabled={isDisabled}
-                onClick={SameChecking}
+                    disabled={isDisabled}
+                    onClick={SameChecking}
                 >완료</Btn>
             </Wrapper>
         </Center>

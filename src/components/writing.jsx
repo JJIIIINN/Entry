@@ -1,5 +1,5 @@
 import React from "react";
-import { BASE_URL } from "../assets/API/axios";
+import { BASE_URL } from "../utils/API/axios";
 import axios from "axios";
 import styled from "styled-components";
 import { useState } from "react";
@@ -12,40 +12,40 @@ const Writing = () => {
     const navigate = useNavigate();
 
     const WritingAPI = () => {
-        axios.post(`${ BASE_URL }/posts`,
-        {
-            "title" : title,
-            "content" : content
-        },
-        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } })
-    .then((Response) => {
-        alert("성공");
-        navigate("/")
-    })
-    .catch((error) => {
-        alert("에러")
-    })
+        axios.post(`${BASE_URL}/posts`,
+            {
+                "title": title,
+                "content": content
+            },
+            { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } })
+            .then((Response) => {
+                alert("성공");
+                navigate("/")
+            })
+            .catch((error) => {
+                alert("에러")
+            })
     }
 
-    return(
+    return (
         <>
             <Center>
                 <Wrapper>
                     <TitleInput
-                    placeholder="1 ~ 100글자 이하로 적어주세요."
-                    onChange={(e) => {
-                        setTitle(e.target.value);
-                    }}
+                        placeholder="1 ~ 100글자 이하로 적어주세요."
+                        onChange={(e) => {
+                            setTitle(e.target.value);
+                        }}
                     />
                     <ContentTextarea
-                    placeholder="1~1000글자 이하로 적어주세요."
-                    onChange={(e) => {
-                        setContent(e.target.value);
-                    }}
+                        placeholder="1~1000글자 이하로 적어주세요."
+                        onChange={(e) => {
+                            setContent(e.target.value);
+                        }}
                     />
                     <WritingBtn
-                    disabled={isDisabled}
-                    onClick={WritingAPI}
+                        disabled={isDisabled}
+                        onClick={WritingAPI}
                     >게시하기</WritingBtn>
                 </Wrapper>
             </Center>

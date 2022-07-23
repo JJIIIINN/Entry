@@ -5,6 +5,7 @@ import SignUpPage from './pages/SignUpPage'
 import WritingPage from "./pages/WritingPage";
 import DetailPage from "./pages/DetailPage";
 import AditPage from "./pages/AditPage";
+import MyPage from "./pages/MyPage";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
       <Route path="/WritingPage" element={<WritingPage />} />
       <Route path="/posts/:id" element={<DetailPage />} />
       <Route path="/posts/adit/:id" element={<AditPage />} />
+      <Route path="/MyPage" element={<MyPage />} />
     </Routes>
     </BrowserRouter>
   </>

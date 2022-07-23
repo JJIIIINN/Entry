@@ -2,67 +2,68 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components"
 import { useParams, useNavigate } from "react-router-dom"
-import { BASE_URL } from "../assets/API/axios";
+import { BASE_URL } from "../utils/API/axios";
 
 const Detail = () => {
     const { id } = useParams();
-    const [ dataList, setDataList ] = useState([]);
+    const [dataList, setDataList] = useState([]);
     const navigate = useNavigate()
 
     useEffect(
         () => {
-            axios.get(`${ BASE_URL }/posts/${id}`)
-            .then((response) =>{
-                console.log(response.data)
-                setDataList(response.data)
-        })
-        .catch((error) => {
-            alert("에러")
-        })
-    },[ id ]
+            axios.get(`${BASE_URL}/posts/${id}`,
+                { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } })
+                .then((response) => {
+                    console.log(response.data)
+                    setDataList(response.data)
+                })
+                .catch((error) => {
+                    alert("에러")
+                })
+        }, [id]
     )
 
     const Adit = () => {
-        navigate(`/posts/adit/${ id }`)
+        navigate(`/posts/adit/${id}`)
     }
 
     const Delete = () => {
-        axios.delete(`${ BASE_URL }/posts/${ id }`,
-        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } })
-        .then((response) => {
-            alert("성공")
-            navigate("/")
-        })
-        .catch((error) => {
-            alert("실패")
-        })
+        axios.delete(`${BASE_URL}/posts/${id}`,
+            { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } })
+            .then((response) => {
+                alert("성공")
+                navigate("/")
+            })
+            .catch((error) => {
+                alert("실패")
+            })
     }
-    
-    return(
+
+    return (
         <>
-        <Wrapper>
-            <TextWrapper>
-                <TitleDiv>
-                    <div>{dataList.title}</div>
-                    <div>{dataList.name}</div>
-                </TitleDiv>
-                <ContentDiv>
-                    <div>{dataList.content}</div>
-                </ContentDiv>
-            </TextWrapper>
-            <BtnDiv>
-                {dataList.is_mine ? 
-                <>
-                    <AditBtn
-                    onClick={ Adit }
-                    >수정하기</AditBtn>
-                    <DeleteBtn
-                    onClick={ Delete }
-                    >삭제하기</DeleteBtn> 
-                </> :
-                <></>}
-            </BtnDiv>
-        </Wrapper>
+            <Wrapper>
+                <TextWrapper>
+                    <TitleDiv>
+                        <div>{dataList.title}</div>
+                        <div>{dataList.name}</div>
+                    </TitleDiv>
+                    <ContentDiv>
+                        <div>{dataList.content}</div>
+                    </ContentDiv>
+                </TextWrapper>
+                <BtnDiv>
+                    {dataList.is_mine ?
+                        <>
+                            <AditBtn
+                                onClick={Adit}
+                            >수정하기</AditBtn>
+                            <DeleteBtn
+                                onClick={Delete}
+                            >삭제하기</DeleteBtn>
+                        </> :
+                        <></>}
+                </BtnDiv>
+            </Wrapper>
         </>
     )
 }

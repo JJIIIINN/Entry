@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../components/header";
-import Detail from "../components/detail";
+import Header from "../components/Header";
+import Detail from "../components/Detail";
 
 const DetailPage = () => {
     return(

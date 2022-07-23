@@ -1,8 +1,8 @@
 import React from "react";
-import { useState ,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "../App.css"
-import { BASE_URL } from "../assets/API/axios";
+import { BASE_URL } from "../utils/API/axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -11,18 +11,18 @@ const Main = () => {
     const navigate = useNavigate();
     useEffect(
         () => {
-        axios.get(`${ BASE_URL }/posts/lists`)
-        .then((Response) => {
-            setDataList(Response.data.post_list)
-        })
-        .catch((error) => {
-            alert("실패")
-        })
-},[])
+            axios.get(`${BASE_URL}/posts/lists`)
+                .then((Response) => {
+                    setDataList(Response.data.post_list)
+                })
+                .catch((error) => {
+                    alert("실패")
+                })
+        }, [])
 
-return (
-    <>
-        <ListH1>게시물 목록</ListH1>
+    return (
+        <>
+            <ListH1>게시물 목록</ListH1>
             <table className="table">
                 <thead>
                     <tr>
@@ -31,7 +31,15 @@ return (
                     </tr>
                 </thead>
                 {dataList.map((list, index) => (
-                    <tbody key={index} onClick={() => {navigate(`/posts/${list.id}`)}}>
+                    <tbody key={index} className={
+                        localStorage.getItem("token")
+                            ? "Curser"
+                            : ""
+                    } onClick={() => {
+                        if (localStorage.getItem("token")) {
+                            navigate(`/posts/${list.id}`)
+                        }
+                    }}>
                         <tr>
                             <td>{index + 1}</td>
                             <td>{list.title}</td>
@@ -39,8 +47,8 @@ return (
                     </tbody>
                 ))}
             </table>
-    </>
-)
+        </>
+    )
 };
 
 

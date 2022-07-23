@@ -37,12 +37,12 @@
   }
 }
 
-tbody {
+.Curser{
   cursor: pointer;
 }
 
 table {
-  width: 48%;
+  width: 750px;
   border-top: 1px solid #000000;
   border-collapse: collapse;
   margin-left: auto;

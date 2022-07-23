@@ -10,46 +10,46 @@ const Header = () => {
 
     const navigate = useNavigate();
 
-const Logout = () => {
-    localStorage.removeItem("token")
-    localStorage.removeItem("id")
-    navigate("/");
+    const Logout = () => {
+        localStorage.removeItem("token")
+        localStorage.removeItem("id")
+        navigate("/");
     }
 
-    return( 
-    <>
-        <Wrapper>
-            <FlexDiv>
-                <Link to="/">
-                    <LogoWrapper>
-                        <LogoBack>
-                            <Img src={LogoBackImg}></Img>
-                            <LogoImg src={EntryLogo}></LogoImg>
-                        </LogoBack>
-                        <LogoText>Entry DSM</LogoText>
-                    </LogoWrapper>
-                </Link>
-            </FlexDiv>
-        <TextWrapper>
-        {!localStorage.getItem("token") &&
-            (<SignWrapper>
-                <LoginText><Link to="/Login">로그인</Link></LoginText>
-                <SignUpText><Link to="/SignUp">회원가입</Link></SignUpText>
-            </SignWrapper>
-            )}
-            {localStorage.getItem("token") && 
-            (
-            <LogOutDiv>
-            <TextDiv><Link to="/WritingPage">글쓰기</Link></TextDiv>
-            <TextDiv><Link to="/MyPage">마이페이지</Link></TextDiv>
-            <TextDiv onClick={Logout}>로그아웃</TextDiv>
-            </LogOutDiv>
-                )}
-            </TextWrapper>
-        </Wrapper>
+    return (
+        <>
+            <Wrapper>
+                <FlexDiv>
+                    <Link to="/">
+                        <LogoWrapper>
+                            <LogoBack>
+                                <Img src={LogoBackImg}></Img>
+                                <LogoImg src={EntryLogo}></LogoImg>
+                            </LogoBack>
+                            <LogoText>Entry DSM</LogoText>
+                        </LogoWrapper>
+                    </Link>
+                </FlexDiv>
+                <TextWrapper>
+                    {!localStorage.getItem("token") &&
+                        (<SignWrapper>
+                            <LoginText><Link to="/Login">로그인</Link></LoginText>
+                            <SignUpText><Link to="/SignUp">회원가입</Link></SignUpText>
+                        </SignWrapper>
+                        )}
+                    {localStorage.getItem("token") &&
+                        (
+                            <LogOutDiv>
+                                <TextDiv><Link to="/WritingPage">글쓰기</Link></TextDiv>
+                                <TextDiv><Link to="/MyPage">마이페이지</Link></TextDiv>
+                                <TextDiv onClick={Logout}>로그아웃</TextDiv>
+                            </LogOutDiv>
+                        )}
+                </TextWrapper>
+            </Wrapper>
         </>
-        )
-    }
+    )
+}
 
 export default Header
 
