@@ -37,9 +37,7 @@ const MyIntroduce = () => {
 							onMouseEnter={() => {
 								setHoverCheck(Hover);
 							}}
-                            onClick={() => {
-
-                            }}
+							onClick={() => {}}
 							src={hoverCheck}
 						></AditImg>
 					</NameWrapper>
