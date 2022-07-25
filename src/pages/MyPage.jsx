@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../components/Header";
-import My from "../components/My"
+import Header from "../components/Headers";
+import My from "../components/MyList"
 import MyIntroduce from "../components/MyIntroduce";
 
 const MyPage = () => {

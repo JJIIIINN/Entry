@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../components/Header";
-import Adit from "../components/Adit";
+import Header from "../components/Headers";
+import Adit from "../components/AditText";
 
 const AditPage = () => {
     return(

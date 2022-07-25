@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../components/Header";
-import Writing from "../components/Writing";
+import Header from "../components/Headers";
+import Writing from "../components/Write";
 
 const WritingPage = () => {
     return(
