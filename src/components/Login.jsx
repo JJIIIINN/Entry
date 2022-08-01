@@ -34,8 +34,8 @@ const Login = () => {
 	const LoginAPI = () => {
 		axios
 			.post(`${BASE_URL}/users/login`, {
-				account_id: id,
-				password: password,
+				"account_id": id,
+				"password": password,
 			})
 			.then((Response) => {
 				if (checking === true) {

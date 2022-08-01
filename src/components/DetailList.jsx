@@ -9,6 +9,8 @@ const Detail = () => {
 	const [dataList, setDataList] = useState([]);
 	const navigate = useNavigate();
 
+	console.log(id)
+
 	useEffect(() => {
 		axios
 			.get(`${BASE_URL}/posts/${id}`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
