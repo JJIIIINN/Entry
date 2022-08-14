@@ -54,8 +54,8 @@ const Detail = () => {
 				<BtnDiv>
 					{dataList.is_mine ? (
 						<>
-							<AditBtn onClick={Adit}>수정하기</AditBtn>
 							<DeleteBtn onClick={Delete}>삭제하기</DeleteBtn>
+							<AditBtn onClick={Adit}>수정하기</AditBtn>
 						</>
 					) : (
 						<></>
@@ -93,7 +93,7 @@ const DeleteBtn = styled.div`
 	color: white;
 	font-weight: 700;
 	font-size: 15px;
-	margin-left: 10px;
+	margin-right: 10px;
 `;
 
 const AditBtn = styled.button`
